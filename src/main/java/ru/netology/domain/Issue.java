@@ -16,7 +16,7 @@ public class Issue {
     private String date;
     private String author;
     private HashSet<String> label;
-    private HashSet<String> assignee;
+    private String assignee;
     private int countComments;
 
     @Override
@@ -24,7 +24,7 @@ public class Issue {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Issue issue = (Issue) o;
-        return id == issue.id && open == issue.open && countComments == issue.countComments && Objects.equals(date, issue.date) && Objects.equals(author, issue.author) && Objects.equals(label, issue.label) && Objects.equals(assignee, issue.assignee);
+        return id == issue.id && open == issue.open && date == issue.date && countComments == issue.countComments && Objects.equals(author, issue.author) && Objects.equals(label, issue.label) && Objects.equals(assignee, issue.assignee);
     }
 
     @Override
@@ -37,11 +37,13 @@ public class Issue {
         return "Issue{" +
                 "id=" + id +
                 ", open=" + open +
-                ", date='" + date + '\'' +
+                ", date=" + date +
                 ", author='" + author + '\'' +
                 ", label=" + label +
-                ", assignee=" + assignee +
+                ", assignee='" + assignee + '\'' +
                 ", countComments=" + countComments +
                 '}';
     }
 }
+
+

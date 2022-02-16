@@ -1,41 +1,42 @@
 package ru.netology.manager;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.netology.domain.Issue;
 import ru.netology.repository.IssueRepository;
 
 import java.util.*;
 import java.util.function.Predicate;
 
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class IssueManager {
     private IssueRepository repository;
-
-    public IssueManager(IssueRepository repository) {
-        this.repository = repository;
-    }
 
     public void add(Issue issue) {
         repository.save(issue);
     }
 
     public List<Issue> findAllOpen() {
-        List<Issue> temp = new ArrayList<>();
+        List<Issue> result = new ArrayList<>();
         for (Issue issue : repository.findAll()) {
             if (issue.isOpen()) {
-                temp.add(issue);
+                result.add(issue);
             }
         }
-        return temp;
+        return result;
     }
 
     public List<Issue> findAllClosed() {
-        List<Issue> temp = new ArrayList<>();
+        List<Issue> result = new ArrayList<>();
         for (Issue issue : repository.findAll()) {
             if (!issue.isOpen()) {
-                temp.add(issue);
+                result.add(issue);
             }
         }
-        return temp;
+        return result;
     }
 
     public List<Issue> filterByAuthor(Predicate<Issue> predicate) {
@@ -57,19 +58,24 @@ public class IssueManager {
         return result;
     }
 
-    public List<Issue> filterByAssignee(Predicate<HashSet> equalAssignee) {
+    public List<Issue> filterByAssignee(String assignee) {
         List<Issue> result = new ArrayList<>();
         for (Issue issue : repository.findAll()) {
-            if (equalAssignee.test(issue.getAssignee())) {
+            if (issue.getAssignee().equals(assignee) && issue.isOpen()) {
                 result.add(issue);
             }
         }
         return result;
     }
 
-    public List<Issue> sortByDate(List<Issue> list) {
-        list.sort((o1, o2) -> o2.getDate().compareTo(o1.getDate()));
-        return list;
+    public List<Issue> getOpenedIssue() {
+        List<Issue> result = new ArrayList<>();
+        for (Issue issue : repository.findAll()) {
+            if (issue.isOpen()) {
+                result.add(issue);
+            }
+        }
+        return result;
     }
 
     public void openById(int id) {
@@ -79,4 +85,5 @@ public class IssueManager {
     public void closeById(int id) {
         repository.closeById(id);
     }
+
 }

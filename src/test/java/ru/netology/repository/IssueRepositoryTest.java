@@ -27,11 +27,11 @@ public class IssueRepositoryTest {
     private HashSet<String> assignee5 = new HashSet<>((Arrays.asList("assignee5")));
 
 
-    private Issue issue1 = new Issue(1, true, "11.02.2022", "author1", label1, assignee1, 13);
-    private Issue issue2 = new Issue(2, false, "21.02.2021", "author2", label2, assignee2, 5);
-    private Issue issue3 = new Issue(3, true, "04.12.2020", "author3", label3, assignee3, 7);
-    private Issue issue4 = new Issue(4, false, "13.05.2021", "author1", label4, assignee4, 11);
-    private Issue issue5 = new Issue(5, true, "07.01.2022", "author4", label2, assignee3, 9);
+    private Issue issue1 = new Issue(1, true, "11.02.2022", "author1", label1, "assignee1", 13);
+    private Issue issue2 = new Issue(2, false, "21.02.2021", "author2", label2, "assignee2", 5);
+    private Issue issue3 = new Issue(3, true, "04.12.2020", "author3", label3, "assignee3", 7);
+    private Issue issue4 = new Issue(4, false, "13.05.2021", "author1", label4, "assignee4", 11);
+    private Issue issue5 = new Issue(5, true, "07.01.2022", "author4", label2, "assignee3", 9);
 
     @BeforeEach
     public void setUp() {
@@ -61,6 +61,7 @@ public class IssueRepositoryTest {
         repository.openById(1);
         assertTrue(issue1.isOpen());
     }
+
 
     @Test
     void shouldCloseById() {
