@@ -102,9 +102,9 @@ public class IssueManagerTest {
 
 
     @Test
-    void shouldOpenById() {
-        manager.openById(2);
-        assertTrue(issue2.isOpen());
+    void shouldById() {
+        manager.findById(3);
+        assertTrue(issue3.isOpen());
     }
 
     @Test

@@ -78,12 +78,11 @@ public class IssueManager {
         return result;
     }
 
-    public void openById(int id) {
-        repository.openById(id);
-    }
-
     public void closeById(int id) {
         repository.closeById(id);
     }
 
+    public void findById (int ID) {
+        repository.findById(ID);
+    }
 }
