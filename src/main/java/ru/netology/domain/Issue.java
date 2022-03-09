@@ -4,46 +4,45 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 public class Issue {
     private int id;
-    private boolean open;
-    private String date;
+    private String title;
     private String author;
-    private HashSet<String> label;
-    private String assignee;
-    private int countComments;
+    private int date;
+    private boolean open;
+    private Set<String> label;
+    private Set<String> assignee;
+
+    @Override
+    public String toString() {
+        return "Issue{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", date=" + date +
+                ", open=" + open +
+                ", label=" + label +
+                ", assignee=" + assignee +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Issue issue = (Issue) o;
-        return id == issue.id && open == issue.open && date == issue.date && countComments == issue.countComments && Objects.equals(author, issue.author) && Objects.equals(label, issue.label) && Objects.equals(assignee, issue.assignee);
+        return id == issue.id && date == issue.date && open == issue.open && Objects.equals(title, issue.title) && Objects.equals(author, issue.author) && Objects.equals(label, issue.label) && Objects.equals(assignee, issue.assignee);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, open, date, author, label, assignee, countComments);
-    }
-
-    @Override
-    public String toString() {
-        return "Issue{" +
-                "id=" + id +
-                ", open=" + open +
-                ", date=" + date +
-                ", author='" + author + '\'' +
-                ", label=" + label +
-                ", assignee='" + assignee + '\'' +
-                ", countComments=" + countComments +
-                '}';
+        return Objects.hash(id, title, author, date, open, label, assignee);
     }
 }
-
-
